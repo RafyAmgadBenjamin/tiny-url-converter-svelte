@@ -1,4 +1,5 @@
 <script>
+import Navigation from './Navigation.svelte'
 	let name = '';
 	let convertedURL = '';
 	function tinyURL(name) {
@@ -7,6 +8,10 @@
 	}
 </script>
 
+
+<div>
+<Navigation/>
+</div>
 <div>
 	<h1>Long URL converter</h1>
 </div>
