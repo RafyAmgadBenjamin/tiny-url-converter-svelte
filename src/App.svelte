@@ -3,9 +3,13 @@
 	let name = '';
 	let convertedURL = '';
 	let ableToConvert = false;
-	function tinyURL(name) {
-		console.log(name);
-		convertedURL = name + 'testing';
+	async function tinyURL(name) {
+		//console.log(name);
+		const res = await fetch(`http://localhost:8080/urls/add-url/`+name,{
+			 mode: 'no-cors'  //to handle CORS
+		});
+		console.log(res)
+		convertedURL = res;
 	}
 	function copyToClipboard() {
 		var range = document.createRange();
@@ -18,6 +22,13 @@
 	$: if (name == '') {
 		convertedURL = '';
 	}
+
+	//Call APIs
+	//Get the original url
+	// onMount(async () => {
+	// 	const res = await fetch(`http://localhost:8080/urls/add-url/`+name);
+	// 	convertedURL = res;
+	// });
 </script>
 
 <div>
