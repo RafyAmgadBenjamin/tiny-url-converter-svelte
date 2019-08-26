@@ -1,4 +1,5 @@
 <script>
+	import { openDB, deleteDB, wrap, unwrap } from 'idb';
 	import Navigation from './Navigation.svelte';
 	let name = '';
 	let convertedURL = '';
@@ -18,6 +19,48 @@
 	$: if (name == '') {
 		convertedURL = '';
 	}
+	//Database
+
+	async function addNewUrl(newTinyUrl, newOriginalUrl) {
+		const db = await openDB('UrlData', 1, {
+			upgrade(db) {
+				//console.log(' I have enter upgrade');
+				// Create a store of objects
+				const store = db.createObjectStore('urls', {
+					// The 'id' property of the object will be the key.
+					// keyPath: 'tinyUrl',
+					keyPath: 'id',
+					// If it isn't explicitly set, create a value by auto incrementing.
+					autoIncrement: true,
+				});
+				// Create an index on the 'date' property of the objects.
+				store.createIndex('id', 'id');
+			},
+		});
+
+		// Add an article:
+		const tx = db.transaction('urls', 'readwrite');
+		await tx.store.add({
+			tinyUrl: newTinyUrl,
+			originalUrl: newOriginalUrl,
+		});
+		await tx.done;
+
+		const value = await db.getFromIndex('urls', 'id', 1);
+		console.log(value);
+	}
+
+	addNewUrl('434fds', 'www.google.com')
+		.then(res => {
+			console.log('success', res);
+		})
+		.catch(e => console.log('fail', e));
+	addNewUrl('234dsf4', 'www.facebook.com')
+		.then(res => {
+			console.log('success', res);
+		})
+		.catch(e => console.log('fail', e));
+	
 </script>
 
 <div>

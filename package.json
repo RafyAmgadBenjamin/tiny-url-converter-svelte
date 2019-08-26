@@ -12,6 +12,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "idb": "^4.0.4",
+    "indexed-db.es6": "^0.5.4",
     "sirv-cli": "^0.4.4",
     "svelte-spa-router": "^1.2.0"
   },
