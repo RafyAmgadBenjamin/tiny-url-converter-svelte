@@ -5,12 +5,12 @@
 	let ableToConvert = false;
 	async function tinyURL(name) {
 		//console.log(name);
-		const res =  await fetch(`http://localhost:8080/urls/add-url/` + name, {
+		const res = await fetch(`http://localhost:8080/urls/add-url/` + name, {
 			//		 mode: 'no-cors'  //to handle CORS
 		});
 		// console.log("response",res.body.getReader().read());
-		let data = await res.json()
-		convertedURL = data.tinyUrl
+		let data = await res.json();
+		convertedURL = 'http://localhost:8080/' + data.tinyUrl;
 	}
 	function copyToClipboard() {
 		var range = document.createRange();
@@ -42,19 +42,20 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-
-			<!--[Long-URL-Input]-->
-			<div class="d-flex justify-content-start">
-				<div>
-					<input bind:value={name} />
+			<!--[Long-URL]-->
+			<div class="row">
+				<!--[Long-URL-Input]-->
+				<div class="col-sm-10">
+					<input class="w-100" bind:value={name} />
 				</div>
 
 				<!--[Convert-BTN]-->
-				<div>
-					<button class="btn btn-primary ml-2" on:click={() => tinyURL(name)}>
+				<div class="col-sm-2">
+					<button class="btn btn-primary" on:click={() => tinyURL(name)}>
 						Convert
 					</button>
 				</div>
+
 			</div>
 			{#if convertedURL != '' && name != ''}
 				<div class="mt-4">
@@ -73,7 +74,7 @@
 						<!--[Copy-BTN]-->
 						<div class="ml-3">
 							<button class="btn btn-light" on:click={() => copyToClipboard()}>
-								Copy
+								<i class="far fa-copy"></i>
 							</button>
 						</div>
 					</div>
