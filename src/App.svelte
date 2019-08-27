@@ -50,7 +50,7 @@
 				</div>
 
 				<!--[Convert-BTN]-->
-				<div class="col-sm-2">
+				<div class="col-sm-2 mt-2 mt-sm-0">
 					<button class="btn btn-primary" on:click={() => tinyURL(name)}>
 						Convert
 					</button>
