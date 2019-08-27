@@ -5,11 +5,12 @@
 	let ableToConvert = false;
 	async function tinyURL(name) {
 		//console.log(name);
-		const res = await fetch(`http://localhost:8080/urls/add-url/`+name,{
-			 mode: 'no-cors'  //to handle CORS
+		const res =  await fetch(`http://localhost:8080/urls/add-url/` + name, {
+			//		 mode: 'no-cors'  //to handle CORS
 		});
-		console.log(res)
-		convertedURL = res;
+		// console.log("response",res.body.getReader().read());
+		let data = await res.json()
+		convertedURL = data.tinyUrl
 	}
 	function copyToClipboard() {
 		var range = document.createRange();
