@@ -38,7 +38,7 @@ def add_Url(originalUrl):
     return json.dumps({'tinyUrl': generatedVal})
 
 # API: used to get the original URL from the tiny URL and redirect to the original URL
-@route('/urls/get-url/<tinyUrl>')
+@route('/<tinyUrl>')
 def get_original_url(tinyUrl):
     r = redis.StrictRedis(host=redis_host, port=redis_port,
                           password=redis_password, decode_responses=True)
