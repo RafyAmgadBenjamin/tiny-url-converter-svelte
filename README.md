@@ -31,6 +31,34 @@ npm run dev
 
 Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
 
+## project structure 
+```
+.
+├── actors
+│   └── url.py
+├── front-end
+│   ├── controllers
+│   │   └── UrlApi.py
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   │   ├── favicon.png
+│   │   ├── global.css
+│   │   └── index.html
+│   ├── rollup.config.js
+│   └── src
+│       ├── App.svelte
+│       ├── main.js
+│       └── Navigation.svelte
+├── models
+│   └── threefold_grid_url.toml
+├── package.py
+├── README.md
+└── tree
+
+6 directories, 15 files
+```
+
 ## Working on front-end
 * Add all the front-end libraries <b> example</b> ```Bootsrap and Font awesome``` in ```/public/index.html```
 
