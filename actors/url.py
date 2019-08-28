@@ -1,11 +1,11 @@
 from Jumpscale import j
 
 
-JSBASE = j.application.JSBaseClass
+# JSBASE = j.application.JSBaseClass
 
 
 
-class url(JSBASE):
+class url():
     def __init__(self, *args, **kwarsg):
         self.bcdb = j.data.bcdb.get("url_test")
         self.model = self.bcdb.model_get(url="threefold.grid.url")
