@@ -67,13 +67,74 @@ to use this component ```<Navigation />```
 
 * Create your html elements and logic in ```front-end/src/App.svelte```
 
+* Create the layout
+```html
+<div class="container ">
+	<div class="mt-3">
+		<h1>Long URL converter</h1>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<!--[Long-URL]-->
+			<div class="row">
+				<!--[Long-URL-Input]-->
+				<div class="col-sm-10">
+					<input class="w-100" bind:value={name} />
+				</div>
+
+				<!--[Convert-BTN]-->
+				<div class="col-sm-2 mt-2 mt-sm-0">
+					<button class="btn btn-primary" on:click={() => tinyURL(name)}>
+						Convert
+					</button>
+				</div>
+
+			</div>
+			{#if convertedURL != '' && name != ''}
+				<div class="mt-4">
+					<!--[Long-url]-->
+					<div>
+						<b>Long URL:</b>
+						<p>{name}</p>
+					</div>
+					<!--[Short-Url]-->
+					<div class="d-flex justify-content-start">
+						<!--[Short-Url-Text]-->
+						<div>
+							<b>Short URL:</b>
+							<p id="tinyURL">{convertedURL}</p>
+						</div>
+						<!--[Copy-BTN]-->
+						<div class="ml-3">
+							<button class="btn btn-light" on:click={() => copyToClipboard()}>
+								<i class="far fa-copy"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			{/if}
+
+		</div>
+	</div>
+</div>
+``` 
+* Fetch data from the API
+```javascript
+async function tinyURL(name) {
+		const res = await fetch(`http://localhost:8080/urls/add-url/` + name, {
+		});
+		let data = await res.json();
+		convertedURL = 'http://localhost:8080/' + data.tinyUrl;
+	}
+```
+
 ## Working on back-end
 * Create python file <b>example</b> ```front-end/controllers/UrlApi.py``` which will contain the code to handle the APIs
 
 * Install bottle Web FrameWork ```pip install bottle```
 
 * Import the server in the python file ```from bottle import route``` then create your APIs to handle the comming requests 
-```
+```python
 @get('/urls/add-url/<originalUrl:path>')
 def add_Url(originalUrl):
     generatedVal = str(generate_random_no())
@@ -84,14 +145,14 @@ def add_Url(originalUrl):
 ```
 
 * Create random number genrator which will create the tiny URL ```import random```  and <b>example</b> for the logic 
-```
+```python
 def generate_random_no():
     random.seed(a=None)
     return randint(0, 1000000)  # randint is inclusive at both ends
 ```
 
 * Install Redis in your system 
-``` 
+``` bash
     sudo apt update
     sudo apt install redis-server
 ```
@@ -100,7 +161,7 @@ def generate_random_no():
 we will store the <b>Tiny URL</b> (which is randomly generated) and the <b>Original URL </b>
 
 * Import Redis into the python file ```import redis```,Create a Redis client with your configurations 
-```
+```python
 redis_host = "localhost"
 redis_port = 6379
 redis_password = ""
@@ -111,7 +172,7 @@ r = redis.StrictRedis(host=redis_host, port=redis_port,
 
 ## Use Gedis from Jumpscale
 * Create actors ```actors/url.py``` 
-```
+```python
 class url():
     def __init__(self, *args, **kwarsg):
         self.bcdb = j.data.bcdb.get("url_test")
@@ -121,7 +182,7 @@ class url():
         True
 ``` 
 * Create modeles ```models/threefold_grid_url.toml```
-    ```
+    ```python
     @url = jumpscale.bcdb.model.url_model
     tinyUrl* = "" (S)
     originalUrl = "" (S)
