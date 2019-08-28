@@ -34,7 +34,7 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 ## Working on front-end
 * Add all the front-end libraries <b> example</b> ```Bootsrap and Font awesome``` in ```/public/index.html```
 
-* Create navigation component <b>example</b> ```Navigation.svelte``` and import this component in ```front-end/src/App.svelte``` <b>example</b> ```import Navigation from './Navigation.svelte';```
+* Create navigation component <b>example</b> ```front-end/src/Navigation.svelte``` and import this component in ```front-end/src/App.svelte``` <b>example</b> ```import Navigation from './Navigation.svelte';```
 to use this component ```<Navigation />```
 
 * Create your html elements and logic in ```front-end/src/App.svelte```
@@ -55,7 +55,7 @@ def add_Url(originalUrl):
     return json.dumps({'tinyUrl': generatedVal})
 ```
 
-* Create random number genrator which will create the tiny URL ```import random```  and example for the logic 
+* Create random number genrator which will create the tiny URL ```import random```  and <b>example</b> for the logic 
 ```
 def generate_random_no():
     random.seed(a=None)
@@ -71,7 +71,7 @@ def generate_random_no():
 * Install Redis database in your project ```pip install redis```
 we will store the <b>Tiny URL</b> (which is randomly generated) and the <b>Original URL </b>
 
-* Import Redis into the python file ```import redis```,Create a Redis client with your configuratins 
+* Import Redis into the python file ```import redis```,Create a Redis client with your configurations 
 ```
 redis_host = "localhost"
 redis_port = 6379
@@ -79,7 +79,7 @@ redis_password = ""
 r = redis.StrictRedis(host=redis_host, port=redis_port,
                           password=redis_password, decode_responses=True)
 ```
- * use Redis commands to store the data in Redis database ```r.set(tinyUrl, originalUrl)```
+ * use Redis commands to store and get the data in Redis database ```r.set(tinyUrl, originalUrl)``` and ```r.get(tinyUrl)```
 
 ## Use Gedis from Jumpscale
 * Create actors ```actors/url.py``` 
