@@ -1,10 +1,11 @@
-from bottle import route, run
+from bottle import route, run, error, template, abort
 from random import randint
 import random
 import redis
 import json
 from bottle import hook, request, response
 from bottle import post, get, put, delete
+
 #  configuration information
 redis_host = "localhost"
 redis_port = 6379
@@ -27,7 +28,6 @@ def enable_cors():
 
 @route('/', method='OPTIONS')
 @route('/<path:path>', method='OPTIONS')
-
 # API: used to generate tiny URL that respresents the original url and add these data into the redis data base
 @get('/urls/add-url/<originalUrl:path>')
 def add_Url(originalUrl):
@@ -42,11 +42,21 @@ def add_Url(originalUrl):
 def get_original_url(tinyUrl):
     r = redis.StrictRedis(host=redis_host, port=redis_port,
                           password=redis_password, decode_responses=True)
-    response.status = 303
-    response.set_header('Location', r.get(tinyUrl))
+    if r.get(tinyUrl) is not None:
+        response.status = 303
+        response.set_header('Location', r.get(tinyUrl))
+    else:
+        response.status = 404
+        abort(404, 'object already exists with that name') #raise an 404 error
+
+#Handle the 404 error response
+@error(404)
+def error404(error):
+    return template('front-end/controllers/404.tpl', e=response.status_code)
 
 
 def generate_random_no():
+
     random.seed(a=None)
     return randint(0, 1000000)  # randint is inclusive at both ends
 
