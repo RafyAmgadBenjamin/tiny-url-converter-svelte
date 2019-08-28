@@ -1,0 +1,3 @@
+@url = jumpscale.bcdb.model.url_model
+tinyUrl* = "" (S)
+originalUrl = "" (S)
