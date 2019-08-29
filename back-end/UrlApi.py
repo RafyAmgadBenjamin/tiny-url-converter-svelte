@@ -52,7 +52,7 @@ def get_original_url(tinyUrl):
 #Handle the 404 error response
 @error(404)
 def error404(error):
-    return template('front-end/controllers/404.tpl', e=response.status_code)
+    return template('views/404.tpl', e=response.status_code)
 
 
 def generate_random_no():
