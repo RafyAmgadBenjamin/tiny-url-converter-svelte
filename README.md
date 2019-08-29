@@ -36,9 +36,11 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 .
 ├── actors
 │   └── url.py
+├── back-end
+│   ├── UrlApi.py
+│   └── views
+│       └── 404.tpl
 ├── front-end
-│   ├── controllers
-│   │   └── UrlApi.py
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── public
@@ -56,7 +58,7 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 ├── README.md
 └── tree
 
-6 directories, 15 files
+7 directories, 16 files
 ```
 
 ## Working on front-end
@@ -113,7 +115,6 @@ to use this component ```<Navigation />```
 					</div>
 				</div>
 			{/if}
-
 		</div>
 	</div>
 </div>
@@ -129,7 +130,7 @@ async function tinyURL(name) {
 ```
 
 ## Working on back-end
-* Create python file <b>example</b> ```front-end/controllers/UrlApi.py``` which will contain the code to handle the APIs
+* Create python file <b>example</b> ```back-end/UrlApi.py``` which will contain the code to handle the APIs
 
 * Install bottle Web FrameWork ```pip install bottle```
 
