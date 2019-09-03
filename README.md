@@ -1,3 +1,8 @@
+This is a tool which is used to convert the long URL into a tiny professional one to be used in other websites.
+
+# Features
+* Tiny URL generation.
+* Redirection to the original URL when the tiny one is used.
 
 
 # svelte app
@@ -14,7 +19,7 @@ cd svelte-app
 *Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
 
-## Get started
+# Get started
 
 Install the dependencies...
 
